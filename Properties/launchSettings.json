@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CheckMediaFiles": {
+      "commandName": "Project",
+      "commandLineArgs": "D:/Desktop"
+    }
+  }
+}

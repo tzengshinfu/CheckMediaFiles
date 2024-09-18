@@ -1,10 +1,10 @@
 ﻿namespace CheckMediaFiles;
 
-using System;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using MimeTypes;
 using NAudio.Wave;
+using System;
 
 class Program
 {
@@ -19,7 +19,9 @@ class Program
         string[] filePaths = Directory.GetFiles(args[0], "*", SearchOption.AllDirectories);
         foreach (string filePath in filePaths)
         {
-            string fileMimeType = MimeTypeMap.GetMimeType(filePath).Split("/")[0];
+            // GIF其實是影片 https://answers.opencv.org/question/226582/cv2imread-fail-to-open-gif-image/?answer=226583#post-id-226583
+            string fileSubType = MimeTypeMap.GetMimeType(filePath).Split("/")[1];
+            string fileMimeType = fileSubType == "gif" ? "video" : MimeTypeMap.GetMimeType(filePath).Split("/")[0];
             switch (fileMimeType)
             {
                 case "image":
